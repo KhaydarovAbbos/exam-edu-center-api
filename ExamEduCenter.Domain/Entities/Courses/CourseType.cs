@@ -1,20 +1,14 @@
 ﻿using ExamEduCenter.Domain.Commons;
-using ExamEduCenter.Domain.Entities.Courses;
 using ExamEduCenter.Domain.Enums;
 using System;
-using System.Collections.Generic;
 
-namespace ExamEduCenter.Domain.Entities.Teachers
+namespace ExamEduCenter.Domain.Entities.Courses
 {
-    public class Teacher : IAuditable
+    public class CourseType : IAuditable
     {
-        public Guid Id { get; set; }
+        public long Id { get; set; }
 
-        public string Firstname { get; set; }
-
-        public string Lastname { get; set; }
-
-        public DateTime CreatedDate { get; set; }
+        public string Name { get; set; }
 
         public DateTime UpdatedDate { get; set; }
 
@@ -22,7 +16,8 @@ namespace ExamEduCenter.Domain.Entities.Teachers
 
         public ItemState State { get; set; }
 
-        public virtual ICollection<Course> Courses { get; set; }
+        public DateTime CreatedDate { get; set; }
+
         public void Create()
         {
             CreatedDate = DateTime.Now;

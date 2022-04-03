@@ -17,12 +17,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <ProjectReference Include="..\ExamEduCenter.Data\ExamEduCenter.Data.csproj" />
+    <ProjectReference Include="..\ExamEduCenter.Service\ExamEduCenter.Service.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ExamEduCenter.Data\ExamEduCenter.Data.csproj" />
-    <ProjectReference Include="..\ExamEduCenter.Service\ExamEduCenter.Service.csproj" />
+    <Folder Include="wwwroot\Images\" />
   </ItemGroup>
 
 </Project>

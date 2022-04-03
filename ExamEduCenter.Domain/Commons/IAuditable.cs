@@ -5,7 +5,7 @@ namespace ExamEduCenter.Domain.Commons
 {
     public interface IAuditable
     {
-        public Guid Id { get; set; }
+        public long Id { get; set; }
 
         public DateTime CreatedDate { get; set; }
 

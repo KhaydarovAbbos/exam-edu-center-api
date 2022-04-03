@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ExamEduCenter.Domain.Configuration
+﻿namespace ExamEduCenter.Domain.Configuration
 {
     public class PaginationParams
     {

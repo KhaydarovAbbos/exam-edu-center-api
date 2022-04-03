@@ -1,0 +1,27 @@
+﻿using ExamEduCenter.Domain.Configuration;
+using ExamEduCenter.Service.Helpers;
+using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace ExamEduCenter.Service.Extensions
+{
+    public static class CollectionExtensions
+    {
+        public static IEnumerable<T> ToPagedList<T>(this IEnumerable<T> source, PaginationParams @params)
+        {
+            var metadata = new PaginationMetaData(source.Count(), @params);
+            var json = JsonConvert.SerializeObject(metadata);
+
+            if (HttpContextHelper.ResponseHeader.Keys.Contains("X-Pagination"))
+            {
+                HttpContextHelper.ResponseHeader.Remove("X-Pagination");
+            }
+
+            HttpContextHelper.Context.Response.Headers.Add("X-Pagination", json);
+
+            return @params.PageSize > 0 && @params.PageIndex >= 0
+                ? source.Skip(@params.PageSize * (@params.PageIndex - 1)) : source;
+        }
+    }
+}

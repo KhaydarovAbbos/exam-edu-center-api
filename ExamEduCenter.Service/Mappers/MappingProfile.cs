@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
-using System;
+using ExamEduCenter.Domain.Entities.Courses;
+using ExamEduCenter.Service.DTOs.Courses;
 
 namespace ExamEduCenter.Service.Mappers
 {
@@ -7,6 +8,9 @@ namespace ExamEduCenter.Service.Mappers
     {
         public MappingProfile()
         {
+            CreateMap<CourseForCreationDto, Course>().ReverseMap();
+            CreateMap<CourseForUpdatingDto, Course>().ReverseMap();
+            CreateMap<CourseTypeForUpdationDto, CourseType>().ReverseMap();
         }
     }
 }

@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Newtonsoft.Json;
 
 namespace ExamEduCenter.Domain.Commons
 {
     public class BaseResponse<T>
     {
+        [JsonIgnore]
         public int? Code { get; set; }
 
         public T Data { get; set; }
