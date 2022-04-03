@@ -38,7 +38,7 @@ namespace ExamEduCenter.Service.Services
             var response = new BaseResponse<Course>();
 
             //check course exsist
-            var exsistStudent = await unitOfWork.Courses.GetAsync(p => p.Name == courseDto.Name);
+            var exsistStudent = await unitOfWork.Courses.GetAsync(p => p.Name == courseDto.Name && p.State != ItemState.Deleted);
 
             if (exsistStudent is not null)
             {
@@ -55,8 +55,8 @@ namespace ExamEduCenter.Service.Services
 
             await unitOfWork.CompleteTaskAsync();
 
-
-            result.Image = "https://localhost:5001/Images/" + result.Image;
+            string storagePath = config.GetSection("Storage:BaseUrl").Value;
+            result.Image = storagePath + result.Image;
 
 
             response.Code = 200;
@@ -119,6 +119,10 @@ namespace ExamEduCenter.Service.Services
             response.Code = 200;
             response.Data = course;
 
+            course.WievCount += 1;
+            await unitOfWork.Courses.UpdateAsync(course);
+            await unitOfWork.CompleteTaskAsync();
+
             return response;
         }
 
@@ -169,7 +173,8 @@ namespace ExamEduCenter.Service.Services
 
             await unitOfWork.CompleteTaskAsync();
 
-            result.Image = "https://localhost:5001/Images/" + result.Image;
+            string storagePath = config.GetSection("Storage:BaseUrl").Value;
+            result.Image = storagePath + result.Image;
 
             response.Code = 200;
             response.Data = result;
