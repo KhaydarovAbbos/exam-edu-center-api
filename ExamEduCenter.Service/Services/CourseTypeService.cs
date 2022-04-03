@@ -61,7 +61,7 @@ namespace ExamEduCenter.Service.Services
 
             if (exsistCourseType is null)
             {
-                response.Error = new ErrorResponse(404, "Course not found");
+                response.Error = new ErrorResponse(404, "Course type not found");
                 return response;
             }
 
@@ -100,7 +100,7 @@ namespace ExamEduCenter.Service.Services
             //check course
             if (courseType is null)
             {
-                response.Error = new ErrorResponse(404, "Course not found");
+                response.Error = new ErrorResponse(404, "Course type not found");
                 return response;
             }
 
@@ -118,7 +118,7 @@ namespace ExamEduCenter.Service.Services
 
             if (exsistCourseType is null)
             {
-                response.Error = new ErrorResponse(404, "Course not found");
+                response.Error = new ErrorResponse(404, "Course type not found");
             }
 
             exsistCourseType = mapper.Map(courseTypeDto, exsistCourseType);

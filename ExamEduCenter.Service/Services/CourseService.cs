@@ -46,6 +46,15 @@ namespace ExamEduCenter.Service.Services
                 return response;
             }
 
+            var exsistCourseType = await unitOfWork.CourseTypes.GetAsync(p => p.Id == courseDto.CourseTypeId && p.State != ItemState.Deleted);
+
+            if (exsistCourseType is null)
+            {
+                response.Error = new ErrorResponse(404, "Course type not found");
+
+                return response;
+            }
+
             //create after checking success
             var mappedCourse = mapper.Map<Course>(courseDto);
 
@@ -135,6 +144,15 @@ namespace ExamEduCenter.Service.Services
             if (exsistCourse is null)
             {
                 response.Error = new ErrorResponse(404, "Course not found");
+
+                return response;
+            }
+
+            var exsistCourseType = await unitOfWork.CourseTypes.GetAsync(p => p.Id == courseDto.CourseTypeId && p.State != ItemState.Deleted);
+
+            if (exsistCourseType is null)
+            {
+                response.Error = new ErrorResponse(404, "Course type not found");
             }
 
             exsistCourse = mapper.Map(courseDto, exsistCourse);
