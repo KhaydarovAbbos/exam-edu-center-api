@@ -12,11 +12,11 @@ namespace ExamEduCenter.Api.Controllers
 {
     [ApiController]
     [Route("Api/[controller]")]
-    public class CourseTypeController : ControllerBase
+    public class CourseTypesController : ControllerBase
     {
         private readonly ICourseTypeService courseTypeService;
 
-        public CourseTypeController(ICourseTypeService courseTypeService)
+        public CourseTypesController(ICourseTypeService courseTypeService)
         {
             this.courseTypeService = courseTypeService;
         }

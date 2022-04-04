@@ -14,11 +14,11 @@ namespace ExamEduCenter.Api.Controllers
 {
     [ApiController]
     [Route("Api/[controller]")]
-    public class CourseController : ControllerBase
+    public class CoursesController : ControllerBase
     {
         private readonly ICourseService courseService;
 
-        public CourseController(ICourseService courseService)
+        public CoursesController(ICourseService courseService)
         {
             this.courseService = courseService;
         }
