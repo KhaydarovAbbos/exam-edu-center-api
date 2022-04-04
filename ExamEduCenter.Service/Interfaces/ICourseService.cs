@@ -27,6 +27,5 @@ namespace ExamEduCenter.Service.Interfaces
         Task<string> GetImageAsync(long courseId);
 
         Task<BaseResponse<Course>> UpdateCoureAuthor(long courseId, string Author);
-
     }
 }

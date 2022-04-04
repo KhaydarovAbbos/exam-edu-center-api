@@ -20,6 +20,5 @@ namespace ExamEduCenter.Service.Interfaces
         Task<BaseResponse<CourseType>> GetAsync(Expression<Func<CourseType, bool>> expression);
 
         Task<BaseResponse<IEnumerable<CourseType>>> GetAllAsync(PaginationParams @params, Expression<Func<Course, bool>> expression = null);
-
     }
 }

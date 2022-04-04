@@ -105,6 +105,7 @@ namespace ExamEduCenter.Service.Services
         {
             var response = new BaseResponse<IEnumerable<Course>>();
 
+            //get all courses
             var students = await unitOfWork.Courses.GetAllAsync(p => p.State != ItemState.Deleted);
 
             response.Code = 200;
@@ -143,6 +144,7 @@ namespace ExamEduCenter.Service.Services
         {
             var response = new BaseResponse<Course>();
 
+            //check exsist course
             var exsistCourse = await unitOfWork.Courses.GetAsync(p => p.Id == courseDto.Id);
 
             if (exsistCourse is null)
@@ -152,6 +154,7 @@ namespace ExamEduCenter.Service.Services
                 return response;
             }
 
+            //check exsist course type
             var exsistCourseType = await unitOfWork.CourseTypes.GetAsync(p => p.Id == courseDto.CourseTypeId && p.State != ItemState.Deleted);
 
             if (exsistCourseType is null)
@@ -159,6 +162,7 @@ namespace ExamEduCenter.Service.Services
                 response.Error = new ErrorResponse(404, "Course type not found");
             }
 
+            //update after checking suuccess
             exsistCourse = mapper.Map(courseDto, exsistCourse);
 
             var result = await unitOfWork.Courses.UpdateAsync(exsistCourse);
@@ -179,12 +183,14 @@ namespace ExamEduCenter.Service.Services
 
             var course = await unitOfWork.Courses.GetAsync(p => p.Id == courseId && p.State != ItemState.Deleted);
 
+            //check course exsist
             if (course is null)
             {
                 response.Error = new ErrorResponse(404, "Course not found");
                 return response;
             }
 
+            //set image after checking success
             course.Image = await SaveFileAsync(file.OpenReadStream(), file.FileName);
 
             course.Update();
@@ -230,6 +236,7 @@ namespace ExamEduCenter.Service.Services
         {
             var response = new BaseResponse<Course>();
 
+            //check for course exsist
             var course = await unitOfWork.Courses.GetAsync(p => p.Id == courseId && p.State != ItemState.Deleted);
 
             if (course is null)
@@ -238,6 +245,7 @@ namespace ExamEduCenter.Service.Services
                 return response;
             }
 
+            //update course author after checking success
             course.Author = Author;
             course.Update();
 
