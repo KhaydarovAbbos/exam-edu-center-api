@@ -63,10 +63,11 @@ namespace ExamEduCenter.Service.Services
 
             var result = await unitOfWork.Courses.CreateAsync(mappedCourse);
 
+            await unitOfWork.CompleteTaskAsync();
+
             string storagePath = config.GetSection("Storage:BaseUrl").Value;
             result.Image = storagePath + result.Image;
 
-            await unitOfWork.CompleteTaskAsync();
 
             response.Code = 200;
             response.Data = result;
@@ -129,6 +130,9 @@ namespace ExamEduCenter.Service.Services
             await unitOfWork.Courses.UpdateAsync(course);
             await unitOfWork.CompleteTaskAsync();
 
+            string storagePath = config.GetSection("Storage:BaseUrl").Value;
+            course.Image = storagePath + course.Image;
+
             response.Code = 200;
             response.Data = course;
 
@@ -189,10 +193,10 @@ namespace ExamEduCenter.Service.Services
 
             result.Update();
 
+            await unitOfWork.CompleteTaskAsync();
+
             string storagePath = config.GetSection("Storage:BaseUrl").Value;
             result.Image = storagePath + result.Image;
-
-            await unitOfWork.CompleteTaskAsync();
 
             response.Code = 200;
             response.Data = result;
