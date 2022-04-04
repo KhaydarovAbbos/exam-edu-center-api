@@ -62,11 +62,10 @@ namespace ExamEduCenter.Service.Services
 
             var result = await unitOfWork.Courses.CreateAsync(mappedCourse);
 
-            await unitOfWork.CompleteTaskAsync();
-
             string storagePath = config.GetSection("Storage:BaseUrl").Value;
             result.Image = storagePath + result.Image;
 
+            await unitOfWork.CompleteTaskAsync();
 
             response.Code = 200;
             response.Data = result;
@@ -125,12 +124,12 @@ namespace ExamEduCenter.Service.Services
                 return response;
             }
 
-            response.Code = 200;
-            response.Data = course;
-
             course.WievCount += 1;
             await unitOfWork.Courses.UpdateAsync(course);
             await unitOfWork.CompleteTaskAsync();
+
+            response.Code = 200;
+            response.Data = course;
 
             return response;
         }
@@ -189,10 +188,10 @@ namespace ExamEduCenter.Service.Services
 
             result.Update();
 
-            await unitOfWork.CompleteTaskAsync();
-
             string storagePath = config.GetSection("Storage:BaseUrl").Value;
             result.Image = storagePath + result.Image;
+
+            await unitOfWork.CompleteTaskAsync();
 
             response.Code = 200;
             response.Data = result;
