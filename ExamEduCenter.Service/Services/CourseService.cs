@@ -59,6 +59,7 @@ namespace ExamEduCenter.Service.Services
             var mappedCourse = mapper.Map<Course>(courseDto);
 
             mappedCourse.Image = await SaveFileAsync(courseDto.Image.OpenReadStream(), courseDto.Image.FileName);
+            mappedCourse.Create();
 
             var result = await unitOfWork.Courses.CreateAsync(mappedCourse);
 
